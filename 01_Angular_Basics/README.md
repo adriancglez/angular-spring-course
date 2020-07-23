@@ -58,3 +58,75 @@ Existen diferentes formas de integrar bootstrap a un proyecto en Angular
     
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
     ~~~
+
+---
+
+## CREACIÓN DE COMPONENTES EN ANGULAR
+
+Es recomendable que cada componente creado se considere lo siguiente:
+
+* Se debe crear un directorio dentro de la carpeta `src\app\`.
+
+* Dentro del directorio creado, crear archivo con la extensión `.ts`, usar la nomenclatura `component`.\
+    `file.component.ts`
+
+* Dentro de ese archivo crear una clase que tenga la expresión `export` y como buena práctica se recomienda que el nombre empiece en mayúscula y finalice con la palabra `Component`.
+    ~~~
+    export class ClaseComponent {
+        ...
+    }
+    ~~~
+
+* Se debe decorar o anotar la clase con el decorador `@Component()`
+    ~~~
+    @Component()
+    export class ClaseComponent {
+        ...
+    }
+    ~~~
+
+* Importar la clase Component `import { Component } from '@angular/core';`
+    ~~~
+    import { Component } from '@angular/core';
+
+    @Component()
+    export class ClaseComponent {
+        ...
+    }
+    ~~~
+
+* Agregar los atributos al decorador `@Component`, los cuales son: `selector` y `template`
+    ~~~
+    import { Component } from '@angular/core';
+
+    @Component({
+        selector: 'app-name',
+        template: `<h1>Content HTML</h1>`
+    })
+    export class ClaseComponent {
+        ...
+    }
+    ~~~
+
+* Registrar el nuevo componente en `app.module.ts`
+
+    ~~~
+    ...
+    import { ClaseComponent } from './clase/clase.component';
+    ...
+    ~~~
+
+* En el array `declarations`, registrar el componente:
+
+    ~~~
+    declarations: [
+        ...,
+        HeaderComponent
+    ],
+    ~~~
+
+* En el archivo donde se desea integrar el contenido del componente, crear la etiqueta con el nombre del `selector` creado en la clase del componente:
+
+    ~~~
+    <app-name></app-name>
+    ~~~
