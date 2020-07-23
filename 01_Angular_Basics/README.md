@@ -95,7 +95,7 @@ Es recomendable que cada componente creado se considere lo siguiente:
     }
     ~~~
 
-* Agregar los atributos al decorador `@Component`, los cuales son: `selector` y `template`
+* Agregar los atributos al decorador `@Component`, los cuales son: `selector` y `template` ó `templateUrl`
     ~~~
     import { Component } from '@angular/core';
 
@@ -107,6 +107,8 @@ Es recomendable que cada componente creado se considere lo siguiente:
         ...
     }
     ~~~
+
+    **Notas:** Existen dos formas de integrar contenido `HTML` a un componente, ya sea con el atributo `template` ó `templateUrl`. Con `template` se inserta el código `html` directo, esa práctica no es recomendada. Con `templateUrl` se inserta la url del archivo `.html` que contiene el código `HTML` a mostrar, esta práctica es la más recomendada.
 
 * Registrar el nuevo componente en `app.module.ts`
 
