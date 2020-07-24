@@ -151,3 +151,19 @@ Pocisionarse en la carpeta donde se creará el nuevo componente, escribir el com
 > ng generate class name.component
 
 Este comando crea los archivos `.ts`, el resto se realiza manualmente.
+
+Para crear todo el componente completo, se usa el comando:
+
+> ng generate component name
+
+> ng g c name
+
+## DIRECTIVAS
+
+### *ng-For
+
+Sirve para iternar una lista o array y mostrar cada uno de los elementos en la página web. La sintaxis para usar `*ng-For` es:
+
+    <li ... *ngFor="let item of items">{{ item }}</li>
+
+donde `item` es la variable que representará un elemento de la lista a mostrar y `items` es la lista a recorrer.
