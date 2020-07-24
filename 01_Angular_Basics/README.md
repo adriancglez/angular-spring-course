@@ -63,6 +63,8 @@ Existen diferentes formas de integrar bootstrap a un proyecto en Angular
 
 ## CREACIÓN DE COMPONENTES EN ANGULAR
 
+### FORMA MANUAL
+
 Es recomendable que cada componente creado se considere lo siguiente:
 
 * Se debe crear un directorio dentro de la carpeta `src\app\`.
@@ -123,7 +125,7 @@ Es recomendable que cada componente creado se considere lo siguiente:
     ~~~
     declarations: [
         ...,
-        HeaderComponent
+        ClaseComponent
     ],
     ~~~
 
@@ -132,3 +134,20 @@ Es recomendable que cada componente creado se considere lo siguiente:
     ~~~
     <app-name></app-name>
     ~~~
+
+* Si se desea agregar estilos, se debe crear un archivo con extensión `.css`, con el mismo nombre que los componentes. Se manda a llamar en el componente `.ts` con el atributo `styleUrls`, este atributo es un array:
+
+    ~~~
+    @Component({
+    ...,
+    styleUrls: ['./clase.component.css']
+  })
+    ~~~
+
+### FORMA AUTOMÁTICA CON CLI
+
+Pocisionarse en la carpeta donde se creará el nuevo componente, escribir el comando:
+
+> ng generate class name.component
+
+Este comando crea los archivos `.ts`, el resto se realiza manualmente.
