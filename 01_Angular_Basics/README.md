@@ -160,10 +160,16 @@ Para crear todo el componente completo, se usa el comando:
 
 ## DIRECTIVAS
 
-### *ng-For
+### *ngFor
 
-Sirve para iternar una lista o array y mostrar cada uno de los elementos en la página web. La sintaxis para usar `*ng-For` es:
+Sirve para iternar una lista o array y mostrar cada uno de los elementos en la página web. La sintaxis para usar `*ngFor` es:
 
     <li ... *ngFor="let item of items">{{ item }}</li>
 
 donde `item` es la variable que representará un elemento de la lista a mostrar y `items` es la lista a recorrer.
+
+### *ngIf
+
+Sirve para evaluar una expresión y así mostrar u ocultar contenido `HTML`. La sintaxis para *ngIf es:
+
+    <ul ... *ngIf="expresión">
