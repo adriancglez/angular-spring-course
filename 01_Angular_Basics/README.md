@@ -173,3 +173,68 @@ donde `item` es la variable que representará un elemento de la lista a mostrar 
 Sirve para evaluar una expresión y así mostrar u ocultar contenido `HTML`. La sintaxis para *ngIf es:
 
     <ul ... *ngIf="expresión">
+
+### SERVICE E INYECCIÓN DE DEPENDENCIAS
+
+Para crear una clase `Service`, se ejecuta el comando dentro de la carpeta donde se creará el archivo:
+
+> ng g service service-name
+
+La clase servicio tiene un decorador denominado `Injectable`, este decorador, indica qué tipo de clase representa en Angular, cuál va a ser su rol dentro de la aplicación. En resumen, `Injectable` es para clases de Servicio y una clase de servicio representa la lógica de negocio y se puede inyectar a otros componentes.
+
+Se debe importar en el archivo `app.module.ts`:
+
+    import { ClassService } from './class/class.service';
+
+Y declarar en el array `providers`:
+
+    providers: [
+        ClassService
+    ],
+
+### OBSERVABLES
+
+Los observables nos sirven para trabajar de forma asíncrona consumiendo APIs REST del BackEnd, de tal modo que siempre están en modo escucha ante cualquier cambio en los datos desde el BackEnd.
+
+Para trabajar con observables, se deben importar los siguientes paquetes:
+
+    import { of, Observable } from 'rxjs';
+
+### RUTAS
+
+Utilizando rutas podemos dividir nuestra aplicación en diferentes secciones o áreas, las cuales se podrían llamar páginas, pero en realidad no son páginas aisladas.
+
+Una aplicación en Angular es en una sola página SPA (Single Page Application), es decir tenemos una sola página para renderizar páginas diferentes y Angular utiliza esta técnica como routing.
+
+La idea es dentro de esta página, a través de rutas, anidar un contenido de un componente que esté mapeado a una URL.
+
+Para hacer uso de la técnica del routing, en el archivo `app.module.ts`, importar:
+
+    import { RouterModule, Routes } from '@angular/router';
+
+Crear el arreglo de rutas que aputará a cada componente:
+
+    const routes: Routes = [
+        {path: '', redirectTo: '/component-1', pathMatch: 'full'},
+        {path: 'component-2', component: Class1Component},
+        {path: 'component-1', component: Class2Component}
+    ];
+
+En el array `imports`, declarar el array de rutas:
+
+    imports: [
+        ...,
+        RouterModule.forRoot(routes)
+    ],
+
+En el `HTML` principal, usar la directiva:
+
+    <router-outlet></router-outlet>
+
+Para apuntar a cada URL de las rutas:
+
+    routerLink="/component-1"
+
+Para determinar si un link está activo:
+
+    routerLinkActive="active"
