@@ -238,3 +238,22 @@ Para apuntar a cada URL de las rutas:
 Para determinar si un link está activo:
 
     routerLinkActive="active"
+
+### INTEGRAR BOOTSTRAP
+
+Existen diferentes formas de integrar Bootstrap a una aplicación en Angular, una buena práctica es que se instale vía CLI. Para ello se debe instalar: `bootstrap`, `jquery` y `popper`, con el comando:
+
+> npm install bootstrap jquery popper.js --save
+
+Integramos el path en el archivo `angular.json` en el array `styles` el css y en el array `scripts` los js.
+
+    "styles": [
+        "node_modules/bootstrap/dist/css/bootstrap.min.css",
+        ...
+    ],
+    "scripts": [
+        "node_modules/jquery/dist/jquery.min.js",
+        "node_modules/popper.js/dist/umd/popper.min.js",
+        "node_modules/bootstrap/dist/js/bootstrap.min.js",
+        ...
+    ]
