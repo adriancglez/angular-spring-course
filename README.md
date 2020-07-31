@@ -56,3 +56,25 @@ Para empezar a trabajar en este curso, se requieren instalar las siguientes herr
 * Angular
 
     `npm install -g @angular/cli`
+
+### JAVA
+
+* JDK 11
+
+    https://www.oracle.com/java/technologies/javase-jdk11-downloads.html
+
+### MySQL
+
+* MySQL Server
+
+    https://dev.mysql.com/downloads/windows/installer/8.0.html
+
+### OTRAS
+
+* Postman
+
+    https://www.postman.com/downloads/
+
+* IDE
+
+    https://www.eclipse.org/downloads/packages/release/2020-06/r/eclipse-ide-enterprise-java-developers
