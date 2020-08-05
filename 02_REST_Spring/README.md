@@ -86,3 +86,41 @@ Dentro de esa clase, declaramos una variable que será la interfaz `repository` 
 y de esta forma `this.iMyEntityRepository` podemos llamar a los métodos de la interfáz `repository`.
 
 <hr>
+
+### RESTCONTROLLER
+
+El `RestController` es una clase que nos permite comunicar el `FrontEnd` con el `BackEnd` vía API, normalmente enviando y recibiendo datos en formato `JSON`, esta clase es la que realiza la llamada a la clase que contiene toda la lógica de negocios (`service`).
+
+Para declarar una clase como `RestController`, a nivel clase se debe decorar con la anotación `@RestController`.
+
+Es de buena práctica que la clase anotada con `@RestController`, se encuentre mapeada con la URI `/api`.
+
+    @RestController
+    @RequestMapping("/api")
+    public class MyRestController {
+        ...
+    }
+
+### USO DE CORS PARA COMPARTIR RECURSOS EN API REST
+
+`CORS` significa intercambio de recursos de origen cruzado, permite a los navegadores modernos enviar y recibir datos restringidos, como por ejemplo pueden ser flujo de datos, stream, archivos de un dominio, imágenes, hojas de estilos (CSS), scripts, etc, en general cualquier tipo de recursos desde un dominio a otro diferente que ha hecho la petición, es decir, es un mecanismo de control de acceso HTTP, para acceder a ciertos recursos en un servidor BackEnd.
+
+Para que esto pueda funcionar, en nuestra aplicación BackEnd, debemos configurar el `CORS`, en el servidor `API REST`, es decir, en el paquete `CORS` determina si se permite compartir recursos en una solicitud de origen cruzado en un recurso específico en función de, si el dominio específico que realiza la solicitud está permitido.
+
+Para resumir el modo en que trabaja `CORS`, es interactuando entre el navegador web y el servidor para determinar si es seguro o no permitir estas peticiones de origen cruzado.
+
+![cors-template](./CORS-complete.png)
+
+Primero se envía un `pre-request` indicando si el dominio que intenta acceder a este recurso en el servidor si tiene acceso a este tipo de peticiones. Por ejemplo, si tiene acceso a post, get, put, delete y va a devolver al navegador todos los métodos que están soportados para este dominio.
+
+Luego se envía el request final, que requiere el recurso y se define ahí si este dominio tiene permiso para acceder a este recurso y si es así va a devolver la respuesta con el recurso solicitado.
+
+Para realizar esta configuración, la clase `RestController` se debe decorar con la anotación `@CrossOrigin`, dentro de ella, se tienen varios atributos donde podemos especificar, por ejemplo el origins, en él se indica el dominio o la ip del servidor, y puede soportar un arreglo, es decir, una lista de dominios permitidos.
+
+    @CrossOrigin(origins = {"http://url_servidor"})
+    @RestController
+    @RequestMapping("/api")
+    public class MyRestController {
+        ...
+    }
+
