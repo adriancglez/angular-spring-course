@@ -23,4 +23,22 @@ public class ClienteServiceImpl implements IClienteService {
     public List<Cliente> findAll() {
         return (List<Cliente>) this.iClienteRepository.findAll();
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Cliente findById(Long id) {
+        return this.iClienteRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    @Transactional
+    public Cliente save(Cliente cliente) {
+        return this.iClienteRepository.save(cliente);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Long id) {
+        this.iClienteRepository.deleteById(id);
+    }
 }

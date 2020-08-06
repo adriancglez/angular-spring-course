@@ -1,7 +1,10 @@
-<div class="card border-light mb-3">
+<div class="card border-light mb-3 container mt-5">
   <div class="card-header">Clientes</div>
   <div class="card-body">
     <h5 class="card-title">Listado de Clientes</h5>
+    <div class="my-2">
+      <button class="btn btn-primary" type="button" [routerLink]="['/customer/form']">Crear Cliente</button>
+    </div>
     <table class="table table-bordered table-striped">
       <thead>
       <tr>
@@ -10,6 +13,7 @@
         <th>Apellido</th>
         <th>Email</th>
         <th>Fecha</th>
+        <th>Editar</th>
       </tr>
       </thead>
       <tbody>
@@ -19,6 +23,9 @@
         <td>{{ customer.apellido }}</td>
         <td>{{ customer.email }}</td>
         <td>{{ customer.createAt }}</td>
+        <td>
+          <button class="btn btn-info" type="button" name="button" [routerLink]="['/customer/form',customer.id]">Editar</button>
+        </td>
       </tr>
       </tbody>
     </table>
