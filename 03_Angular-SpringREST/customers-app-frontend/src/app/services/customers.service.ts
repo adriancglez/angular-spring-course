@@ -13,17 +13,25 @@ export class CustomersService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getCustomers(): Observable<Customer[]> {
+  public getCustomers(): Observable<Customer[]> {
     return this.httpClient.get(this.urlEndPoint).pipe(
       map(response => response as Customer[])
     );
   }
 
-  create(customer: Customer): Observable<Customer> {
+  public create(customer: Customer): Observable<Customer> {
     return this.httpClient.post<Customer>(this.urlEndPoint, customer, {headers: this.httpHeaders});
   }
 
-  getCustomer(id: number): Observable<Customer> {
-    return this.httpClient.get<Customer>(`${this.urlEndPoint}/${id}`,);
+  public getCustomer(id: number): Observable<Customer> {
+    return this.httpClient.get<Customer>(`${this.urlEndPoint}/${id}`);
+  }
+
+  public update(customer: Customer): Observable<Customer> {
+    return this.httpClient.put<Customer>(`${this.urlEndPoint}/${customer.id}`, customer, {headers: this.httpHeaders});
+  }
+
+  public delete(id: number): Observable<Customer> {
+    return this.httpClient.delete<Customer>(`${this.urlEndPoint}/${id}`, {headers: this.httpHeaders});
   }
 }
