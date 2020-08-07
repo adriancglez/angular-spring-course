@@ -34,6 +34,15 @@ export class FormComponent implements OnInit {
       if(id) {
         this.customerService.getCustomer(id).subscribe(customer => this.customer = customer);
       }
-    })
+    });
+  }
+
+  public update(): void {
+    this.customerService.update(this.customer).subscribe(
+      response => {
+        this.router.navigate(['/customer']);
+        swal.fire('Cliente Actualizado', `El Cliente ${this.customer.nombre} ha sido actualizado con éxito`, 'success');
+      }
+    )
   }
 }
