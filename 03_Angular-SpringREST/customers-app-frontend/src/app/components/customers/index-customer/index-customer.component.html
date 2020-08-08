@@ -26,7 +26,7 @@
           <td>{{ customer.nombre }}</td>
           <td>{{ customer.apellido }}</td>
           <td>{{ customer.email }}</td>
-          <td>{{ customer.createAt }}</td>
+          <td>{{ customer.createAt | date: 'dd/MM/y' }}</td>
           <td>
             <button class="btn btn-info" type="button" name="button" [routerLink]="['/customer/form',customer.id]">Editar</button>
           </td>
