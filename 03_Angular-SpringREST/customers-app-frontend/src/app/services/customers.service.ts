@@ -1,10 +1,11 @@
-import {Injectable} from '@angular/core';
-import {Customer} from '../models/customer';
-import {Observable, of, throwError} from 'rxjs';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { map, catchError } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { formatDate, DatePipe, registerLocaleData } from "@angular/common";
+import { Customer } from '../models/customer';
+import { Observable, of, throwError } from 'rxjs';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { map, catchError, tap } from "rxjs/operators";
 import swal from 'sweetalert2';
-import {Router} from "@angular/router";
+import { Router } from "@angular/router";
 
 @Injectable()
 export class CustomersService {
@@ -15,9 +16,30 @@ export class CustomersService {
   constructor(private httpClient: HttpClient, private router: Router) {
   }
 
-  public getCustomers(): Observable<Customer[]> {
-    return this.httpClient.get(this.urlEndPoint).pipe(
-      map(response => response as Customer[])
+  public getCustomers(page: number): Observable<any> {
+    return this.httpClient.get(this.urlEndPoint + '/page/' + page).pipe(
+      tap((response: any) => {
+        console.log('ClienteService: tap 1');
+        (response.content as Customer[]).forEach(customer => {
+          console.log(customer.nombre);
+        });
+      }),
+      map((response: any) => {
+        (response.content as Customer[]).map(customer => {
+          customer.nombre = customer.nombre.toUpperCase();
+          // let datePipe = new DatePipe('es');
+          /*customer.createAt = datePipe.transform(customer.createAt, 'EEEE dd, MMMM yyyy');*/
+          /*customer.createAt = formatDate(customer.createAt, 'EEEE dd, MMM yyyy', 'en-US');*/
+          return customer;
+        });
+        return response;
+      }),
+      tap(response => {
+        console.log('ClienteService: tap 2');
+        (response.content as Customer[]).forEach(customer => {
+          console.log(customer.nombre);
+        });
+      })
     );
   }
 
@@ -25,6 +47,11 @@ export class CustomersService {
     return this.httpClient.post(this.urlEndPoint, customer, {headers: this.httpHeaders}).pipe(
       map((response: any) => response.cliente as Customer),
       catchError(err => {
+
+        if(err.status == 400) {
+          return throwError(err);
+        }
+
         console.log(err.error.mensaje);
         swal.fire(err.error['mensaje'], err.error['error'], 'error');
         return throwError(err);
@@ -47,6 +74,11 @@ export class CustomersService {
     return this.httpClient.put(`${this.urlEndPoint}/${customer.id}`, customer, {headers: this.httpHeaders}).pipe(
       map((response: any) => response.cliente as Customer),
       catchError(err => {
+
+        if(err.status == 400) {
+          return throwError(err);
+        }
+
         console.log(err.error.mensaje);
         swal.fire(err.error['mensaje'], err.error['error'], 'error');
         return throwError(err);

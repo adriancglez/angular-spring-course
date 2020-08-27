@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CustomersService } from "../../../services/customers.service";
 import {Customer} from "../../../models/customer";
 import Swal from "sweetalert2";
+import { tap } from 'rxjs/operators';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-index-customer',
@@ -12,12 +14,23 @@ export class IndexCustomerComponent implements OnInit {
 
   customers: Customer[];
 
-  constructor(private customersService: CustomersService) { }
+  constructor(private customersService: CustomersService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.customersService.getCustomers().subscribe(
-      customers => this.customers = customers
-    );
+    this.activatedRoute.paramMap.subscribe(params => {
+
+      let page: number = +params.get('page');
+
+      if (!page) {
+        page = 0;
+      }
+
+      this.customersService.getCustomers(page).pipe(tap(response => {
+        (response.content as Customer[]).forEach(customer => {
+          console.log(customer.nombre);
+        });
+      })).subscribe(response => this.customers = response.content as Customer[]);
+    })
   }
 
   public delete(customer: Customer): void {
