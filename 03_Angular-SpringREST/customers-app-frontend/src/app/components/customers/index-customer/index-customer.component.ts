@@ -13,6 +13,7 @@ import { ActivatedRoute } from "@angular/router";
 export class IndexCustomerComponent implements OnInit {
 
   customers: Customer[];
+  paginator: any;
 
   constructor(private customersService: CustomersService, private activatedRoute: ActivatedRoute) { }
 
@@ -25,11 +26,10 @@ export class IndexCustomerComponent implements OnInit {
         page = 0;
       }
 
-      this.customersService.getCustomers(page).pipe(tap(response => {
-        (response.content as Customer[]).forEach(customer => {
-          console.log(customer.nombre);
-        });
-      })).subscribe(response => this.customers = response.content as Customer[]);
+      this.customersService.getCustomers(page).pipe().subscribe(response => {
+        this.customers = response.content as Customer[];
+        this.paginator = response;
+      });
     })
   }
 
