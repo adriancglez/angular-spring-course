@@ -19,9 +19,7 @@ export class CustomersService {
   public getCustomers(page: number): Observable<any> {
     return this.httpClient.get(this.urlEndPoint + '/page/' + page).pipe(
       tap((response: any) => {
-        console.log('ClienteService: tap 1');
         (response.content as Customer[]).forEach(customer => {
-          console.log(customer.nombre);
         });
       }),
       map((response: any) => {
@@ -35,9 +33,7 @@ export class CustomersService {
         return response;
       }),
       tap(response => {
-        console.log('ClienteService: tap 2');
         (response.content as Customer[]).forEach(customer => {
-          console.log(customer.nombre);
         });
       })
     );
